@@ -2,16 +2,17 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 const RightSidePanel = () => {
   const [isPanelOpen, setPanelOpen] = useState(false);
-  return isPanelOpen ? (
-    <aside
-      className={
-        "md:basis-1/4 basis-full md:static absolute transition-all right-0 z-50 w-full bg-white shrink-0 border-l h-full p-5"
-      }
-    >
-      <PanelContent setPanelOpen={setPanelOpen} />
-    </aside>
-  ) : (
-    <PanelOpenBtn setPanelOpen={setPanelOpen} />
+  return (
+    <>
+      <aside
+        className={`md:static absolute overflow-x-hidden transition-all right-0 z-50 w-full bg-white shrink-0 border-r h-full ${
+          isPanelOpen ? "md:basis-1/4 basis-full p-5" : "basis-0 grow-0"
+        }`}
+      >
+        {isPanelOpen && <PanelContent setPanelOpen={setPanelOpen} />}
+      </aside>
+      {!isPanelOpen && <PanelOpenBtn setPanelOpen={setPanelOpen} />}
+    </>
   );
 };
 
